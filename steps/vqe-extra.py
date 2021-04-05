@@ -42,6 +42,7 @@ def build_circuits() -> Dict[str, QuantumCircuit]:
 # coefficients is the coefficients of the Hamiltonian we are interested in
 # min_value: value to start our search
 # max_value: value to end our search
+#def vqe(backend_specs, coefficients, min_value=0, max_value=2 * np.pi):
 def vqe(backend_specs, coefficients, min_value=0, max_value=2 * np.pi):
     # Build a backend from the specs we passed to the step
     if isinstance(backend_specs, str):
@@ -56,6 +57,12 @@ def vqe(backend_specs, coefficients, min_value=0, max_value=2 * np.pi):
     else:
         coefficients_dict = coefficients
 
+    # Build the coeff we passed to the step
+    if isinstance(minmaxvalues, str):
+        minmax_dict = yaml.load(minmaxvalues, Loader=yaml.SafeLoader)
+    else:
+        minmax_dict = minmaxvalues;
+        
     # Build the circuits
     theta = Parameter("θ")
     ansatz = build_ansatz(theta)
@@ -68,8 +75,8 @@ def vqe(backend_specs, coefficients, min_value=0, max_value=2 * np.pi):
         theta,
         circuits,
         coefficients_dict,
-        min_value=min_value,
-        max_value=max_value,
+        min_value=minmax_dict["min_value"],
+        max_value=minmax_dict["max_value"],
     )
 
     # Find the index of the minimum energy
