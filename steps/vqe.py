@@ -13,7 +13,7 @@ from zquantum.core.interfaces.backend import QuantumBackend
 def build_ansatz(param: Parameter) -> QuantumCircuit:
     ansatz = QuantumCircuit(1, 1)
     # MISSING
-
+    ansatz.ry(param, 0)
     return ansatz
 
 
