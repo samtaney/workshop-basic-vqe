@@ -45,10 +45,10 @@ steps:
       z: 4
       i: 2
     type: coefficients
-  - minmaxvalues: 
-      min_value: 0
-      max_value: 2
-    type: minmaxvalues
+  -  min_value: 0.0
+    type: float
+  -  max_value: 2.0
+    type: float
   outputs:
   - name: results
     type: output
